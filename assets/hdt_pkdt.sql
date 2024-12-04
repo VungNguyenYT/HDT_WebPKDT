@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 04, 2024 lúc 05:27 PM
+-- Thời gian đã tạo: Th12 04, 2024 lúc 06:50 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -158,16 +158,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `Price`, `Stock`, `ImageURL`, `CategoryID`) VALUES
-(1, 'Ốp Lưng Silicone', 'Ốp lưng cao cấp chất liệu silicone', '120000.00', 50, 'oplung1.jpg', 1),
-(2, 'Sạc Không Dây', 'Đế sạc nhanh không dây', '550000.00', 30, 'sac1.jpg', 2),
-(3, 'Tai Nghe Bluetooth', 'Tai nghe không dây, chống ồn', '950000.00', 20, 'tainghe1.jpg', 3),
-(4, 'Kính Cường Lực', 'Kính cường lực chất lượng cao', '70000.00', 100, 'kinh1.jpg', 4),
-(5, 'Cáp Sạc USB-C', 'Cáp sạc nhanh dài 1m', '150000.00', 70, 'cap1.jpg', 5),
-(6, 'Ốp Lưng Nhựa Trong', 'Ốp lưng trong suốt chống sốc', '180000.00', 40, 'oplung2.jpg', 1),
-(7, 'Sạc Dự Phòng 10000mAh', 'Sạc dự phòng nhỏ gọn', '700000.00', 25, 'sacduphong1.jpg', 2),
-(8, 'Tai Nghe Có Dây', 'Tai nghe có dây chất lượng cao', '250000.00', 35, 'tainghe2.jpg', 3),
-(9, 'Cáp Lightning', 'Cáp Lightning chính hãng', '200000.00', 50, 'cap2.jpg', 5),
-(10, 'Kính Bảo Vệ Camera', 'Kính cường lực bảo vệ camera', '50000.00', 120, 'kinh2.jpg', 4);
+(1, 'Ốp Lưng Silicone', 'Ốp lưng cao cấp chất liệu silicone', '25000.00', 50, 'oplung-silicon.jpg', 1),
+(2, 'Sạc Không Dây', 'Đế sạc nhanh không dây', '1090000.00', 30, 'skd-magpro.jpg', 2),
+(3, 'Tai Nghe Bluetooth', 'Tai nghe không dây, chống ồn', '370000.00', 20, 'tainghebt-baseuswm02.jpg', 3),
+(4, 'Kính Cường Lực', 'Kính cường lực chất lượng cao', '100000.00', 100, 'kinhcuongluc.jpg', 4),
+(5, 'Cáp Sạc USB-C', 'Cáp sạc nhanh dài 1m', '40000.00', 70, 'capsacsamsung.jpg', 5),
+(6, 'Ốp Lưng Nhựa Trong', 'Ốp lưng trong suốt chống sốc', '20000.00', 40, 'oplung-trong.jpg', 1),
+(7, 'Sạc Dự Phòng 10000mAh', 'Sạc dự phòng nhỏ gọn', '220000.00', 25, 'sacdpava.jpg', 2),
+(8, 'Tai Nghe Có Dây', 'Tai nghe có dây chất lượng cao', '240000.00', 35, 'taingheday.jpg', 3),
+(9, 'Cáp Lightning', 'Cáp Lightning chính hãng', '550000.00', 50, 'capsaclightning.jpeg', 5),
+(10, 'Kính Bảo Vệ Camera', 'Kính cường lực bảo vệ camera', '60000.00', 120, 'kinhcameraip12.jpg', 4);
 
 -- --------------------------------------------------------
 
