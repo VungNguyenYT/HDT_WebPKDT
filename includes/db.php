@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'phone_accessories';
+$dbname = 'hdt_pkdt';
 $username = 'root';
 $password = '';
 
