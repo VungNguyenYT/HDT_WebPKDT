@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 04, 2024 lúc 06:50 PM
+-- Thời gian đã tạo: Th12 05, 2024 lúc 04:49 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -178,6 +178,7 @@ INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `Price`, `Sto
 CREATE TABLE `users` (
   `UserID` int(11) NOT NULL,
   `Username` varchar(50) NOT NULL,
+  `Password` varchar(255) NOT NULL,
   `PasswordHash` varchar(255) NOT NULL,
   `Role` enum('Admin','Employee','Customer') NOT NULL,
   `FullName` varchar(100) DEFAULT NULL,
@@ -191,12 +192,12 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`UserID`, `Username`, `PasswordHash`, `Role`, `FullName`, `Email`, `PhoneNumber`, `Address`, `CreatedAt`) VALUES
-(1, 'admin', 'hash123', 'Admin', 'Quản Trị Viên', 'admin@example.com', '0123456789', 'Văn phòng chính', '2024-12-04 16:23:00'),
-(2, 'nhanvien1', 'hash234', 'Employee', 'Nguyễn Văn An', 'nhanvien1@example.com', '0987654321', 'Chi nhánh Hà Nội', '2024-12-04 16:23:00'),
-(3, 'khachhang1', 'hash345', 'Customer', 'Trần Thị Bích Ngọc', 'khachhang1@example.com', '0912345678', '123 Đường Lê Lợi, Quận 1, TP.HCM', '2024-12-04 16:23:00'),
-(4, 'khachhang2', 'hash456', 'Customer', 'Lê Minh Tuấn', 'khachhang2@example.com', '0923456789', '456 Đường Phan Chu Trinh, TP. Đà Nẵng', '2024-12-04 16:23:00'),
-(5, 'khachhang3', 'hash567', 'Customer', 'Phạm Hồng Hạnh', 'khachhang3@example.com', '0934567890', '789 Đường Trần Hưng Đạo, Hà Nội', '2024-12-04 16:23:00');
+INSERT INTO `users` (`UserID`, `Username`, `Password`, `PasswordHash`, `Role`, `FullName`, `Email`, `PhoneNumber`, `Address`, `CreatedAt`) VALUES
+(1, 'admin', '', 'hash123', 'Admin', 'Quản Trị Viên', 'admin@example.com', '0123456789', 'Văn phòng chính', '2024-12-04 16:23:00'),
+(2, 'nhanvien1', '', 'hash234', 'Employee', 'Nguyễn Văn An', 'nhanvien1@example.com', '0987654321', 'Chi nhánh Hà Nội', '2024-12-04 16:23:00'),
+(3, 'khachhang1', '', 'hash345', 'Customer', 'Trần Thị Bích Ngọc', 'khachhang1@example.com', '0912345678', '123 Đường Lê Lợi, Quận 1, TP.HCM', '2024-12-04 16:23:00'),
+(4, 'khachhang2', '', 'hash456', 'Customer', 'Lê Minh Tuấn', 'khachhang2@example.com', '0923456789', '456 Đường Phan Chu Trinh, TP. Đà Nẵng', '2024-12-04 16:23:00'),
+(5, 'khachhang3', '', 'hash567', 'Customer', 'Phạm Hồng Hạnh', 'khachhang3@example.com', '0934567890', '789 Đường Trần Hưng Đạo, Hà Nội', '2024-12-04 16:23:00');
 
 --
 -- Chỉ mục cho các bảng đã đổ
