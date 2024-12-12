@@ -2,6 +2,14 @@
 include 'includes/header.php';
 session_start();
 
+include 'includes/db.php'; // Đường dẫn tới file db.php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit;
+}
+
 // Xử lý giỏ hàng
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productID = $_POST['product_id'];

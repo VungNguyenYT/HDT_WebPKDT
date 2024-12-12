@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 05, 2024 lúc 12:57 PM
+-- Thời gian đã tạo: Th12 12, 2024 lúc 07:11 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -104,7 +104,7 @@ CREATE TABLE `orders` (
   `OrderDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `TotalAmount` decimal(10,2) NOT NULL,
   `Status` enum('Pending','Completed','Cancelled') DEFAULT 'Pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `orders`
@@ -185,9 +185,9 @@ CREATE TABLE `users` (
   `Email` varchar(100) DEFAULT NULL,
   `Phone` varchar(20) DEFAULT NULL,
   `PhoneNumber` varchar(15) DEFAULT NULL,
-  `Address` text DEFAULT NULL,
+  `Address` mediumtext DEFAULT NULL,
   `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`

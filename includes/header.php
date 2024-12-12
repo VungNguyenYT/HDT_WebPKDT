@@ -12,8 +12,15 @@
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.php">Phụ Kiện Điện Thoại</a>
+                <a href="index.php">GEEHES STORE</a>
             </div>
+
+            <form action="search_results.php" method="GET">
+                <input type="text" name="query" placeholder="Tìm kiếm sản phẩm..." required>
+                <button type="submit">Tìm kiếm</button>
+            </form>
+
+
             <nav>
                 <ul>
                     <li><a href="index.php">Trang chủ</a></li>
