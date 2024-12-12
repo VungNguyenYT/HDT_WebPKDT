@@ -16,9 +16,9 @@
             </div>
             
             <div class="search-bar" style="display: flex;" >
-                <form style="display: flex;" action="search_results.php" method="GET">
+                <form style="display: flex; height: auto;" action="search_results.php" method="GET">
                     <input style=" margin: auto ;" type="text" name="query" placeholder="Tìm kiếm sản phẩm..." required>
-                    <button style="width:auto ; height: auto; margin: 1px" type="submit">Tìm kiếm</button>
+                    <button style="width:auto ; height: auto; margin: 10px" type="submit">Tìm kiếm</button>
                 </form>
             </div>
 
