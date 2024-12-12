@@ -1,4 +1,8 @@
+
 <?php
+include 'includes/db.php';
+include 'includes/header.php';
+
 // Kết nối đến API
 if (!isset($_GET['query']) || empty($_GET['query'])) {
     echo "<p>Vui lòng nhập từ khóa để tìm kiếm</p>";
