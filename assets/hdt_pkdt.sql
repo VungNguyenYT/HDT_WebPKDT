@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 05, 2024 lúc 04:49 AM
+-- Thời gian đã tạo: Th12 05, 2024 lúc 12:57 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -183,6 +183,7 @@ CREATE TABLE `users` (
   `Role` enum('Admin','Employee','Customer') NOT NULL,
   `FullName` varchar(100) DEFAULT NULL,
   `Email` varchar(100) DEFAULT NULL,
+  `Phone` varchar(20) DEFAULT NULL,
   `PhoneNumber` varchar(15) DEFAULT NULL,
   `Address` text DEFAULT NULL,
   `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp()
@@ -192,12 +193,13 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`UserID`, `Username`, `Password`, `PasswordHash`, `Role`, `FullName`, `Email`, `PhoneNumber`, `Address`, `CreatedAt`) VALUES
-(1, 'admin', '', 'hash123', 'Admin', 'Quản Trị Viên', 'admin@example.com', '0123456789', 'Văn phòng chính', '2024-12-04 16:23:00'),
-(2, 'nhanvien1', '', 'hash234', 'Employee', 'Nguyễn Văn An', 'nhanvien1@example.com', '0987654321', 'Chi nhánh Hà Nội', '2024-12-04 16:23:00'),
-(3, 'khachhang1', '', 'hash345', 'Customer', 'Trần Thị Bích Ngọc', 'khachhang1@example.com', '0912345678', '123 Đường Lê Lợi, Quận 1, TP.HCM', '2024-12-04 16:23:00'),
-(4, 'khachhang2', '', 'hash456', 'Customer', 'Lê Minh Tuấn', 'khachhang2@example.com', '0923456789', '456 Đường Phan Chu Trinh, TP. Đà Nẵng', '2024-12-04 16:23:00'),
-(5, 'khachhang3', '', 'hash567', 'Customer', 'Phạm Hồng Hạnh', 'khachhang3@example.com', '0934567890', '789 Đường Trần Hưng Đạo, Hà Nội', '2024-12-04 16:23:00');
+INSERT INTO `users` (`UserID`, `Username`, `Password`, `PasswordHash`, `Role`, `FullName`, `Email`, `Phone`, `PhoneNumber`, `Address`, `CreatedAt`) VALUES
+(1, 'admin', '', 'hash123', 'Admin', 'Quản Trị Viên', 'admin@example.com', NULL, '0123456789', 'Văn phòng chính', '2024-12-04 16:23:00'),
+(2, 'nhanvien1', '', 'hash234', 'Employee', 'Nguyễn Văn An', 'nhanvien1@example.com', NULL, '0987654321', 'Chi nhánh Hà Nội', '2024-12-04 16:23:00'),
+(3, 'khachhang1', '', 'hash345', 'Customer', 'Trần Thị Bích Ngọc', 'khachhang1@example.com', NULL, '0912345678', '123 Đường Lê Lợi, Quận 1, TP.HCM', '2024-12-04 16:23:00'),
+(4, 'khachhang2', '', 'hash456', 'Customer', 'Lê Minh Tuấn', 'khachhang2@example.com', NULL, '0923456789', '456 Đường Phan Chu Trinh, TP. Đà Nẵng', '2024-12-04 16:23:00'),
+(5, 'khachhang3', '', 'hash567', 'Customer', 'Phạm Hồng Hạnh', 'khachhang3@example.com', NULL, '0934567890', '789 Đường Trần Hưng Đạo, Hà Nội', '2024-12-04 16:23:00'),
+(6, 'VungNguyenYT', '$2y$10$6C4h0QPChG72UcdSa/Iq5eHfONUYNM..rg9qlXVH.V8hIg85CLcGu', '', 'Customer', 'Nguyễn Văn Vửng', 'nguyenvanvung252@gmail.com', '0347482012', NULL, 'Ấp Phú Lân, Xã Song Lộc, huyện Châu Thành, tỉnh Trà Vinh', '2024-12-05 11:39:18');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -299,7 +301,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
