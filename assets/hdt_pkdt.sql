@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 12, 2024 lúc 07:11 AM
+-- Thời gian đã tạo: Th12 18, 2024 lúc 07:04 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -103,7 +103,7 @@ CREATE TABLE `orders` (
   `UserID` int(11) DEFAULT NULL,
   `OrderDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `TotalAmount` decimal(10,2) NOT NULL,
-  `Status` enum('Pending','Completed','Cancelled') DEFAULT 'Pending'
+  `Status` enum('Pending','Completed','Cancelled') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -177,15 +177,15 @@ INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `Price`, `Sto
 
 CREATE TABLE `users` (
   `UserID` int(11) NOT NULL,
-  `Username` varchar(50) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `PasswordHash` varchar(255) NOT NULL,
-  `Role` enum('Admin','Employee','Customer') NOT NULL,
-  `FullName` varchar(100) DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL,
-  `Phone` varchar(20) DEFAULT NULL,
-  `PhoneNumber` varchar(15) DEFAULT NULL,
-  `Address` mediumtext DEFAULT NULL,
+  `Username` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `PasswordHash` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Role` enum('Admin','Employee','Customer') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `FullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `PhoneNumber` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Address` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
