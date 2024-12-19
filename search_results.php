@@ -32,6 +32,6 @@ if (isset($data['success']) && $data['success']) {
         echo "</div>";
     }
 } else {
-    echo "<p>" . htmlspecialchars($data['message'] ?? 'Lỗi khi tìm kiếm sản phẩm') . "</p>";
+    echo "<p>" . htmlspecialchars($data['message'] ?? 'Không tìm thấy sản phẩm') . "</p>";
 }
 ?>
