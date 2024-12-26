@@ -11,48 +11,62 @@ if (empty($cart)) {
     exit;
 }
 
-// Xử lý đơn hàng sau khi người dùng nhấn "Đặt hàng"
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Lấy thông tin từ form
     $customerName = $_POST['customer_name'];
     $customerPhone = $_POST['customer_phone'];
     $customerAddress = $_POST['customer_address'];
     $paymentMethod = $_POST['payment_method'];
 
-    // Thêm thông tin vào bảng Orders
-    $query = "INSERT INTO Orders (CustomerName, Phone, Address, PaymentMethod, OrderDate) 
-              VALUES (:name, :phone, :address, :payment)";
-    $stmt = $conn->prepare($query);
-    $stmt->execute([
-        'name' => $customerName,
-        'phone' => $customerPhone,
-        'address' => $customerAddress,
-        'payment' => $paymentMethod
-    ]);
+    try {
+        // Bắt đầu transaction
+        $conn->beginTransaction();
 
-    // Lấy OrderID vừa tạo
-    $orderID = $conn->lastInsertId();
-
-    // Thêm thông tin vào bảng OrderDetails
-    foreach ($cart as $productID => $quantity) {
-        $query = "SELECT Price FROM Products WHERE ProductID = :id";
-        $stmt = $conn->prepare($query);
-        $stmt->execute(['id' => $productID]);
-        $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $query = "INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price) 
-                  VALUES (:order_id, :product_id, :quantity, :price)";
+        // Thêm thông tin vào bảng `orders`
+        $query = "INSERT INTO orders (customer_name, contact, address, payment, OrderDate) 
+                  VALUES (:name, :contact, :address, :payment, NOW())";
         $stmt = $conn->prepare($query);
         $stmt->execute([
-            'order_id' => $orderID,
-            'product_id' => $productID,
-            'quantity' => $quantity,
-            'price' => $product['Price']
+            'name' => $customerName,
+            'contact' => $customerPhone,
+            'address' => $customerAddress,
+            'payment' => $paymentMethod
         ]);
-    }
 
-    // Xóa giỏ hàng sau khi đặt hàng
-    unset($_SESSION['cart']);
-    echo "<div class='container'><p>Đơn hàng của bạn đã được đặt thành công. <a href='index.php'>Tiếp tục mua sắm</a></p></div>";
+        // Lấy OrderID vừa tạo
+        $orderID = $conn->lastInsertId();
+
+        // Thêm thông tin vào bảng `orderdetails`
+        foreach ($cart as $productID => $quantity) {
+            $query = "SELECT Price FROM products WHERE ProductID = :id";
+            $stmt = $conn->prepare($query);
+            $stmt->execute(['id' => $productID]);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $query = "INSERT INTO orderdetails (OrderID, ProductID, Quantity, Price) 
+                      VALUES (:order_id, :product_id, :quantity, :price)";
+            $stmt = $conn->prepare($query);
+            $stmt->execute([
+                'order_id' => $orderID,
+                'product_id' => $productID,
+                'quantity' => $quantity,
+                'price' => $product['Price']
+            ]);
+        }
+
+        // Xóa giỏ hàng sau khi đặt hàng
+        unset($_SESSION['cart']);
+
+        // Hoàn tất transaction
+        $conn->commit();
+
+        // Thông báo thành công
+        echo "<div class='container'><p>Đơn hàng của bạn đã được đặt thành công. <a href='index.php'>Tiếp tục mua sắm</a></p></div>";
+    } catch (PDOException $e) {
+        // Rollback nếu có lỗi
+        $conn->rollBack();
+        echo "<div class='container'><p>Đã xảy ra lỗi: " . $e->getMessage() . "</p></div>";
+    }
     include 'includes/footer.php';
     exit;
 }
@@ -83,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php
                 $total = 0;
                 foreach ($cart as $productID => $quantity):
-                    $query = "SELECT ProductName, Price FROM Products WHERE ProductID = :id";
+                    $query = "SELECT ProductName, Price FROM products WHERE ProductID = :id";
                     $stmt = $conn->prepare($query);
                     $stmt->execute(['id' => $productID]);
                     $product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -91,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $total += $subtotal;
                     ?>
                     <tr>
-                        <td><?= $product['ProductName'] ?></td>
+                        <td><?= htmlspecialchars($product['ProductName']) ?></td>
                         <td><?= $quantity ?></td>
                         <td><?= number_format($product['Price'], 0, ',', '.') ?> VND</td>
                         <td><?= number_format($subtotal, 0, ',', '.') ?> VND</td>
