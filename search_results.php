@@ -1,37 +1,37 @@
-
 <?php
-include 'includes/db.php';
 include 'includes/header.php';
 
-// Kết nối đến API
-if (!isset($_GET['query']) || empty($_GET['query'])) {
+$query = $_GET['query'] ?? '';
+
+if (!$query) {
     echo "<p>Vui lòng nhập từ khóa để tìm kiếm</p>";
+    include 'includes/footer.php';
     exit;
 }
 
-$query = htmlspecialchars($_GET['query']);
-
-// Gửi yêu cầu đến API
+// URL API với cổng 8888
 $api_url = 'http://localhost:8888/HDT_WebPKDT/api/search.php?query=' . urlencode($query);
 $response = file_get_contents($api_url);
 $data = json_decode($response, true);
 
-// Hiển thị kết quả tìm kiếm
-echo "<pre>";
-print_r($data);
-echo "</pre>";
-
-if (isset($data['success']) && $data['success']) {
+echo "<div class='container'>";
+if (isset($data['success']) && $data['success'] === true) {
     echo "<h2>Kết quả tìm kiếm cho: " . htmlspecialchars($query) . "</h2>";
-    foreach ($data['products'] as $products) {
-        echo "<div class='products'>";
-        echo "<img src='assets/images/" . htmlspecialchars($products['image']) . "' alt='" . htmlspecialchars($products['ProductName']) . "'>";
-        echo "<h3>" . htmlspecialchars($products['ProductName']) . "</h3>";
-        echo "<p>Giá: " . number_format($products['price'], 0, ',', '.') . " VNĐ</p>";
-        echo "<p>" . htmlspecialchars($products['description']) . "</p>";
+    echo "<div class='product-grid'>";
+    foreach ($data['products'] as $product) {
+        echo "<div class='product-card'>";
+        echo "<img src='assets/images/" . htmlspecialchars($product['ImageURL']) . "' alt='" . htmlspecialchars($product['ProductName']) . "'>";
+        echo "<h3>" . htmlspecialchars($product['ProductName']) . "</h3>";
+        echo "<p>Giá: " . number_format($product['Price'], 0, ',', '.') . " VNĐ</p>";
+        echo "<p>" . htmlspecialchars($product['Description']) . "</p>";
+        echo "<a href='product.php?id=" . htmlspecialchars($product['ProductID']) . "' class='btn'>Xem chi tiết</a>";
         echo "</div>";
     }
+    echo "</div>";
 } else {
     echo "<p>" . htmlspecialchars($data['message'] ?? 'Không tìm thấy sản phẩm') . "</p>";
 }
+echo "</div>";
+
+include 'includes/footer.php';
 ?>

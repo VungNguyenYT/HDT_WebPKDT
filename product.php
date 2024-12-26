@@ -3,8 +3,16 @@ include 'includes/db.php';
 include 'includes/header.php';
 
 // Lấy thông tin sản phẩm
-$productID = $_GET['id'];
-$query = "SELECT * FROM Products WHERE ProductID = :id";
+$productID = $_GET['id'] ?? null;
+if (!$productID) {
+    echo "<p>Không tìm thấy sản phẩm!</p>";
+    include 'includes/footer.php';
+    exit;
+}
+
+$query = "SELECT ProductID, ProductName, Description, Price, Stock, ImageURL 
+          FROM products 
+          WHERE ProductID = :id";
 $stmt = $conn->prepare($query);
 $stmt->execute(['id' => $productID]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -18,10 +26,11 @@ if (!$product) {
 
 <div class="container">
     <div class="product-detail">
-        <img src="assets/images/<?= $product['ImageURL'] ?>" alt="<?= $product['ProductName'] ?>">
+        <img src="assets/images/<?= htmlspecialchars($product['ImageURL']) ?>"
+            alt="<?= htmlspecialchars($product['ProductName']) ?>">
         <div class="info">
-            <h1><?= $product['ProductName'] ?></h1>
-            <p><?= $product['Description'] ?></p>
+            <h1><?= htmlspecialchars($product['ProductName']) ?></h1>
+            <p><?= htmlspecialchars($product['Description']) ?></p>
             <p>Giá: <?= number_format($product['Price'], 0, ',', '.') ?> VND</p>
             <form action="cart.php" method="post">
                 <input type="hidden" name="product_id" value="<?= $product['ProductID'] ?>">
