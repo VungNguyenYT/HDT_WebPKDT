@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $confirmPassword) {
         $error = 'Mật khẩu không khớp.';
     } else {
-
         $query = "SELECT * FROM Users WHERE Username = :username OR Email = :email";
         $stmt = $conn->prepare($query);
         $stmt->execute(['username' => $username, 'email' => $email]);
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'phone' => $phone,
                 'address' => $address
             ]);
-            echo "<p>Tài khoản đã được tạo thành công. <a href='login.php'>Đăng nhập ngay</a></p>";
+            echo "<p style='color: green;'>Tài khoản đã được tạo thành công. <a href='login.php'>Đăng nhập ngay</a></p>";
             exit;
         }
     }
@@ -51,40 +50,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Ký Tài Khoản</title>
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
-    <div class="container">
-        <h1>Đăng Ký Tài Khoản</h1>
+<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0;">
+    <div class="container"
+        style="max-width: 400px; margin: 50px auto; padding: 20px; background-color: #fff; border: 1px solid #ddd; border-radius: 5px;">
+        <h1 style="text-align: center; margin-bottom: 20px;">Đăng Ký Tài Khoản</h1>
         <?php if ($error): ?>
-            <p class="error"><?= $error ?></p>
+            <p class="error" style="color: red; text-align: center;"><?= $error ?></p>
         <?php endif; ?>
         <form action="register.php" method="POST">
-            <label for="full_name">Họ Tên Đầy Đủ:</label>
-            <input type="text" id="full_name" name="full_name" required>
+            <label for="full_name" style="display: block; margin-bottom: 5px; font-weight: bold;">Họ Tên Đầy Đủ:</label>
+            <input type="text" id="full_name" name="full_name" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
+            <input type="email" id="email" name="email" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-            <label for="phone">Số Điện Thoại:</label>
-            <input type="text" id="phone" name="phone" required>
+            <label for="phone" style="display: block; margin-bottom: 5px; font-weight: bold;">Số Điện Thoại:</label>
+            <input type="text" id="phone" name="phone" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-            <label for="username">Tên Đăng Nhập:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="username" style="display: block; margin-bottom: 5px; font-weight: bold;">Tên Đăng Nhập:</label>
+            <input type="text" id="username" name="username" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-            <label for="password">Mật Khẩu:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="password" style="display: block; margin-bottom: 5px; font-weight: bold;">Mật Khẩu:</label>
+            <input type="password" id="password" name="password" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-            <label for="confirm_password">Nhập Lại Mật Khẩu:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
+            <label for="confirm_password" style="display: block; margin-bottom: 5px; font-weight: bold;">Nhập Lại Mật
+                Khẩu:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-            <label for="address">Địa Chỉ:</label>
-            <input type="text" id="address" name="address" required>
+            <label for="address" style="display: block; margin-bottom: 5px; font-weight: bold;">Địa Chỉ:</label>
+            <input type="text" id="address" name="address" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-            <button type="submit">Đăng Ký</button>
+            <button type="submit"
+                style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Đăng
+                Ký</button>
         </form>
-        <p>Bạn đã có tài khoản? <a href="login.php">Đăng nhập ngay</a></p>
+        <p style="text-align: center; margin-top: 15px;">Bạn đã có tài khoản? <a href="login.php"
+                style="color: #007bff; text-decoration: none;">Đăng nhập ngay</a></p>
     </div>
 </body>
 
