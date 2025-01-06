@@ -72,25 +72,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container">
-    <h1>Thanh Toán</h1>
-    <form action="checkout.php" method="POST">
-        <h2>Thông tin khách hàng</h2>
-        <label for="customer_name">Họ và tên:</label>
-        <input type="text" id="customer_name" name="customer_name" required>
-        <label for="customer_phone">Số điện thoại:</label>
-        <input type="text" id="customer_phone" name="customer_phone" required>
-        <label for="customer_address">Địa chỉ:</label>
-        <textarea id="customer_address" name="customer_address" required></textarea>
+<div style="max-width: 800px; margin: 50px auto; font-family: Arial, sans-serif;">
+    <h1 style="text-align: center; margin-bottom: 20px;">Thanh Toán</h1>
+    <form action="checkout.php" method="POST"
+        style="background-color: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+        <h2 style="margin-bottom: 15px;">Thông tin khách hàng</h2>
+        <label for="customer_name" style="display: block; margin-bottom: 5px; font-weight: bold;">Họ và tên:</label>
+        <input type="text" id="customer_name" name="customer_name" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
 
-        <h2>Giỏ hàng</h2>
-        <table>
+        <label for="customer_phone" style="display: block; margin-bottom: 5px; font-weight: bold;">Số điện
+            thoại:</label>
+        <input type="text" id="customer_phone" name="customer_phone" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
+
+        <label for="customer_address" style="display: block; margin-bottom: 5px; font-weight: bold;">Địa chỉ:</label>
+        <textarea id="customer_address" name="customer_address" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; resize: none;"></textarea>
+
+        <h2 style="margin-bottom: 15px;">Giỏ hàng</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <thead>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                    <th>Tổng</th>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Sản phẩm</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Số lượng</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Giá</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Tổng</th>
                 </tr>
             </thead>
             <tbody>
@@ -105,26 +112,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $total += $subtotal;
                     ?>
                     <tr>
-                        <td><?= htmlspecialchars($product['ProductName']) ?></td>
-                        <td><?= $quantity ?></td>
-                        <td><?= number_format($product['Price'], 0, ',', '.') ?> VND</td>
-                        <td><?= number_format($subtotal, 0, ',', '.') ?> VND</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;"><?= htmlspecialchars($product['ProductName']) ?>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><?= $quantity ?></td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                            <?= number_format($product['Price'], 0, ',', '.') ?> VND</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                            <?= number_format($subtotal, 0, ',', '.') ?> VND</td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">Tổng cộng</td>
-                    <td><?= number_format($total, 0, ',', '.') ?> VND</td>
+                    <td colspan="3" style="padding: 10px; border: 1px solid #ddd; text-align: right;"><strong>Tổng
+                            cộng</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <?= number_format($total, 0, ',', '.') ?> VND</td>
                 </tr>
             </tfoot>
         </table>
 
-        <h2>Phương thức thanh toán</h2>
-        <label><input type="radio" name="payment_method" value="COD" checked> Thanh toán khi nhận hàng (COD)</label><br>
-        <label><input type="radio" name="payment_method" value="Transfer"> Chuyển khoản ngân hàng</label>
+        <h2 style="margin-bottom: 15px;">Phương thức thanh toán</h2>
+        <label style="display: block; margin-bottom: 10px;">
+            <input type="radio" name="payment_method" value="COD" checked style="margin-right: 10px;"> Thanh toán khi
+            nhận hàng (COD)
+        </label>
+        <label style="display: block; margin-bottom: 20px;">
+            <input type="radio" name="payment_method" value="Transfer" style="margin-right: 10px;"> Chuyển khoản ngân
+            hàng
+        </label>
 
-        <button type="submit" class="btn">Đặt hàng</button>
+        <button type="submit"
+            style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Đặt
+            hàng</button>
     </form>
 </div>
 
