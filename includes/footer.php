@@ -9,15 +9,15 @@
         </p>
         <div style="margin-top: 10px;">
             <a href="#" style="display: inline-block; margin: 0 10px; width: 30px; height: 30px;">
-                <img src="../assets/images/facebook-icon.png" alt="Facebook"
+                <img src="assets/images/facebook-icon.png" alt="Facebook"
                     style="width: 100%; height: auto; filter: brightness(0) invert(1); transition: filter 0.3s ease;">
             </a>
             <a href="#" style="display: inline-block; margin: 0 10px; width: 30px; height: 30px;">
-                <img src="../assets/images/twitter-icon.png" alt="Twitter"
+                <img src="assets/images/twitter-icon.png" alt="Twitter"
                     style="width: 100%; height: auto; filter: brightness(0) invert(1); transition: filter 0.3s ease;">
             </a>
             <a href="#" style="display: inline-block; margin: 0 10px; width: 30px; height: 30px;">
-                <img src="../assets/images/instagram-icon.png" alt="Instagram"
+                <img src="assets/images/instagram-icon.png" alt="Instagram"
                     style="width: 100%; height: auto; filter: brightness(0) invert(1); transition: filter 0.3s ease;">
             </a>
         </div>
