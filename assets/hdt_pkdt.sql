@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 26, 2024 lúc 06:58 AM
+-- Thời gian đã tạo: Th3 02, 2025 lúc 02:58 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -91,8 +91,8 @@ INSERT INTO `orderdetails` (`OrderDetailID`, `OrderID`, `ProductID`, `Quantity`,
 (3, 2, 2, 1, '550000.00'),
 (4, 2, 5, 2, '150000.00'),
 (5, 3, 4, 3, '70000.00'),
-(6, 4, 2, 1, '1090000.00'),
-(7, 4, 9, 1, '550000.00');
+(6, 4, 2, 2, '1090000.00'),
+(7, 5, 3, 1, '370000.00');
 
 -- --------------------------------------------------------
 
@@ -103,24 +103,25 @@ INSERT INTO `orderdetails` (`OrderDetailID`, `OrderID`, `ProductID`, `Quantity`,
 CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
   `UserID` int(11) DEFAULT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `contact` varchar(15) NOT NULL,
-  `address` text NOT NULL,
-  `payment` varchar(50) NOT NULL,
   `OrderDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `TotalAmount` decimal(10,2) NOT NULL,
-  `Status` enum('Pending','Completed','Cancelled') DEFAULT 'Pending'
+  `Status` enum('Pending','Completed','Cancelled') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'Pending',
+  `customer_name` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `payment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`OrderID`, `UserID`, `customer_name`, `contact`, `address`, `payment`, `OrderDate`, `TotalAmount`, `Status`) VALUES
-(1, 3, '', '', '', '', '2024-12-04 16:26:16', '670000.00', 'Pending'),
-(2, 4, '', '', '', '', '2024-12-04 16:26:16', '850000.00', 'Completed'),
-(3, 5, '', '', '', '', '2024-12-04 16:26:16', '210000.00', 'Pending'),
-(4, NULL, 'Vửng', '0347482012', 'Trà Vinh', 'COD', '2024-12-26 05:56:05', '0.00', 'Pending');
+INSERT INTO `orders` (`OrderID`, `UserID`, `OrderDate`, `TotalAmount`, `Status`, `customer_name`, `contact`, `address`, `payment`) VALUES
+(1, 3, '2024-12-04 16:26:16', '670000.00', 'Pending', '', '', '', ''),
+(2, 4, '2024-12-04 16:26:16', '850000.00', 'Completed', '', '', '', ''),
+(3, 5, '2024-12-04 16:26:16', '210000.00', 'Pending', '', '', '', ''),
+(4, NULL, '2025-03-02 01:58:17', '0.00', 'Pending', 'aa', 'aaaaa', 'aaaa', 'COD'),
+(5, NULL, '2025-03-02 01:58:41', '0.00', 'Pending', 'kjgjhg', 'kkgi', 'khih', 'COD');
 
 -- --------------------------------------------------------
 
@@ -184,15 +185,15 @@ INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `Price`, `Sto
 
 CREATE TABLE `users` (
   `UserID` int(11) NOT NULL,
-  `Username` varchar(50) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `PasswordHash` varchar(255) NOT NULL,
-  `Role` enum('Admin','Employee','Customer') NOT NULL,
-  `FullName` varchar(100) DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL,
-  `Phone` varchar(20) DEFAULT NULL,
-  `PhoneNumber` varchar(15) DEFAULT NULL,
-  `Address` mediumtext DEFAULT NULL,
+  `Username` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `PasswordHash` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Role` enum('Admin','Employee','Customer') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `FullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `PhoneNumber` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Address` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -206,7 +207,9 @@ INSERT INTO `users` (`UserID`, `Username`, `Password`, `PasswordHash`, `Role`, `
 (3, 'khachhang1', '', 'hash345', 'Customer', 'Trần Thị Bích Ngọc', 'khachhang1@example.com', NULL, '0912345678', '123 Đường Lê Lợi, Quận 1, TP.HCM', '2024-12-04 16:23:00'),
 (4, 'khachhang2', '', 'hash456', 'Customer', 'Lê Minh Tuấn', 'khachhang2@example.com', NULL, '0923456789', '456 Đường Phan Chu Trinh, TP. Đà Nẵng', '2024-12-04 16:23:00'),
 (5, 'khachhang3', '', 'hash567', 'Customer', 'Phạm Hồng Hạnh', 'khachhang3@example.com', NULL, '0934567890', '789 Đường Trần Hưng Đạo, Hà Nội', '2024-12-04 16:23:00'),
-(6, 'VungNguyenYT', '$2y$10$6C4h0QPChG72UcdSa/Iq5eHfONUYNM..rg9qlXVH.V8hIg85CLcGu', '', 'Customer', 'Nguyễn Văn Vửng', 'nguyenvanvung252@gmail.com', '0347482012', NULL, 'Ấp Phú Lân, Xã Song Lộc, huyện Châu Thành, tỉnh Trà Vinh', '2024-12-05 11:39:18');
+(6, 'VungNguyenYT', '$2y$10$6C4h0QPChG72UcdSa/Iq5eHfONUYNM..rg9qlXVH.V8hIg85CLcGu', '', 'Customer', 'Nguyễn Văn Vửng', 'nguyenvanvung252@gmail.com', '0347482012', NULL, 'Ấp Phú Lân, Xã Song Lộc, huyện Châu Thành, tỉnh Trà Vinh', '2024-12-05 11:39:18'),
+(7, 'baody2003', '$2y$10$KAMhgemP8O40g8/XvDbiTOOI1tG4Lc6PxoeKm4b6b/QM59l0N1Oc.', '', 'Customer', 'baoduy', 'baody200903@gmail.com', '0866460677', NULL, 'Ấp Cây Gòn, Xã Phong Thạnh, Huyện Cầu Kè, Tỉnh Trà Vinh', '2024-12-19 07:05:24'),
+(8, 'vung', '$2y$10$KI/V3LOZ5KTroygDjTqE8OEDdhqSPrdw0meB.kb7It4F6h77TQNg2', '', 'Customer', 'Vung', 'ass@ddd', '123', NULL, 'aaa', '2024-12-26 06:56:49');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -290,7 +293,7 @@ ALTER TABLE `orderdetails`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `payments`
@@ -308,7 +311,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
